@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if [ -e "/etc/asterisk/xtide.conf" ]; then
+
+ echo "Using xtide.conf for setup..."
+ . /etc/asterisk/xtide.conf
+
+TODAY=`date --date='today' +%Y-%m-%d`
+echo $TODAY
+
+NEWFILE="yes"
+x=`date -r /tmp/xtide.txt +%F`
+#echo $x
+#echo $TODAY
+if [ $e /tmp/xtide.txt ] ;
+then
+ if [ "$TODAY" = "$x" ] ;
+ then
+  NEWFILE="no"
+ fi
+fi
+
+if [ $NEWFILE = "yes" ] ;
+then
+ echo "Generate new file here..."
+
+
+ tide -l "$SITE" | grep $TODAY > /tmp/xtide.today
+ TIDES=`eval "sed -e 's/$TODAY/. .:.: Today at: /g' -e 's/feet/feet,/g' -e 's/EDT/,/g' -e 's/AM/a.m./g'" /tmp/xtide.today`
+ echo " Here is the latest tide, and lunar forecast for $SITENAME brought to you by: Nerd Vittles.: $TIDES:." | cut -c2- > /tmp/xtide.today
+
+ MANANA=`date --date='tomorrow' +%Y-%m-%d`
+ echo $MANANA
+ tide -l "$SITE" | grep $MANANA > /tmp/xtide.tomorrow
+ TIDES=`eval "sed -e 's/$MANANA/. .:.: Tomorrow at: /g' -e 's/feet/feet,/g' -e 's/EDT/,/g' -e 's/AM/a.m./g'" /tmp/xtide.tomorrow`
+ echo ".: $TIDES: Thank you for calling. Goodbye." | cut -c2- > /tmp/xtide.tomorrow
+ cd /tmp
+ rm -f /tmp/xtide.txt
+ rm -f /tmp/xtide.wav
+
+ cat xtide.today > xtide.txt
+ cat xtide.tomorrow >> xtide.txt
+
+ flite -f /tmp/xtide.txt -o /tmp/xtide.wav
+
+fi
+
+else
+  echo "Missing config file: /etc/asterisk/xtide.conf "
+fi
+

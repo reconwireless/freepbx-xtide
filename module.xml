@@ -1,0 +1,20 @@
+<module>
+	<rawname>xtide</rawname>
+	<name>Xtide Reports</name>
+	<version>0.0.0.1</version>
+	<license>GNU GPL2</license>
+	<type>setup</type>
+	<category>Other</category>
+	<menuitems>
+		<tidecity>Xtide</tidecity>
+	</menuitems>
+    <publisher>RECONWIRELESS</publisher> 
+	<description>
+                Provide U.S. TIDES by City
+        </description>
+	 <changelog>
+			*0.0.0* 1st Module xtide for FreePBX  
+        </changelog>
+	<info>https://github.com/reconwireless/freepbx-xtide</info>
+	<location>https://github.com/reconwireless/freepbx-xtide</location>
+ </module>
