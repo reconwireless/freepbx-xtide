@@ -1,5 +1,4 @@
 Installing xtide reports Module<br>
-<h5>Zip Code Database (v1.0)</h5>
 <?php
 if ( (isset($amp_conf['ASTVARLIBDIR'])?$amp_conf['ASTVARLIBDIR']:'') == '') {
 	$astlib_path = "/var/lib/asterisk";
@@ -13,8 +12,7 @@ if ( (isset($amp_conf['ASTVARLIBDIR'])?$amp_conf['ASTVARLIBDIR']:'') == '') {
 ?><br>Installing Default Configuration values.<br>
 <?php
 
-$sql ="INSERT INTO xtideoptions (engine, Xtidesite) ";
-$sql ="INSERT INTO xtideoptions (engine, Xtidesitename) ";
+$sql ="INSERT INTO xtideoptions (engine, Xtidesite, Xtidesitename) ";
 $sql .= "               VALUES ('xtide-flite',        '')";
 $check = $db->query($sql);
 if (DB::IsError($check)) {
